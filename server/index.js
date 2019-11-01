@@ -8,9 +8,14 @@ const app = express()
 
 
 
-// app.use(express.json())
+app.use(express.json())
 
-
+// ENDPOINTS:
+const inventoryUrl = "/api/inventory"
+app.post(inventoryUrl, ctrl.create);
+app.get(inventoryUrl, ctrl.read);
+app.put(inventoryUrl, ctrl.update);
+app.delete(inventoryUrl, ctrl.delete);
 
 
 massive(CONNECTION_STRING).then(databaseConnection => {
