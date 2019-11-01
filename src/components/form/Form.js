@@ -6,22 +6,51 @@ class Form extends Component {
 
   constructor() {
     super();
+
       this.state = {
-      name: '',
-      price: 0,
-      imgurl: ''
+        imgurl: '',
+        name: '',
+        price: 0
     };
   }
 
+// METHODS
+
+handleImgUrlChange(url){
+  this.setState({ imgurl: url })
+}
+
+handleProductNameChange(productName){
+  this.setState({ name: productName })
+}
+
+handlePriceChange(priceChange){
+  this.setState({ price: priceChange })
+}
+handleCancelBtn(){
+  document.getElementById("product-form").reset();
+}
+
+
+
+
+
+//*********/ 
 
   render() {
     return (
       <div>
         <h2>Form.js</h2>
-        <input type="text" name="" id=""/>
-        <input type="text" name="" id=""/>
-        <input type="text" name="" id=""/>
-        <button className="cancel">Cancel</button>
+        
+        <form id="product-form">
+          <p>IMG URL:</p>
+          <input onChange={e => this.handleImgUrlChange(e.target.value)} type="text"/>
+          <p>Product Name:</p>
+          <input onChange={e => this.handleProductNameChange(e.target.value)} type="text"/>
+          <p>Price:</p>
+          <input onChange={e => this.handlePriceChange(e.target.value)} type="text"/>
+        </form>
+        <button onClick={this.handleCancelBtn} className="cancel">Cancel</button>
         <button className="add">Add To Inventory</button>
 
       </div>
