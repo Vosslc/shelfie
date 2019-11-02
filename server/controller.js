@@ -2,30 +2,32 @@ module.exports = {
 
   create: (req, res, next) => {
 
-    res.status(200).send("It worked!!! Woohoo!!!")
+    res.status(200).send("WTF did you create?")
   },
 
   read: (req, res, next) => {
-    const dbInstance = req.app.get('db');
-    // const {image_url, price, name} = req.body;
+    const databaseConnection = req.app.get('db')
 
-    dbInstance.get_inventory([ shelfie ])
-      .then( () => res.sendStatus(200) )
+    databaseConnection.get_inventory()
+      .then( products => res.status(200).send( products ) )
       .catch( err => {
         res.status(500).send({errorMessage: "Oops! Something went wrong. Our engineers have been informed!"});
         console.log(err)
-      });
-    // res.status(200).send("It worked!!! Woohoo!!!")
+      } );
+
+
+    
   },
 
   update: (req, res, next) => {
 
-    res.status(200).send("It worked!!! Woohoo!!!")
+    res.status(200).send("WTF did you update?")
   },
 
   delete: (req, res, next) => {
 
-    res.status(200).send("It worked!!! Woohoo!!!")
+    res.status(200).send("WTF did you delete?")
   }
 
 }
+

@@ -12,17 +12,7 @@ class App extends Component {
     super(props);
 
       this.state = {
-        inventory: [{
-          image: 'https://picsum.photos/id/1018/300/150',
-          name: "coffee",
-          price: "10"
-        },
-        {
-          image: 'https://picsum.photos/id/2/300/150',
-          name: "Stuff",
-          price: "888"
-        }
-      ]
+        inventory: []
     };
   }
 
