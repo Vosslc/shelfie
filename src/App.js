@@ -14,39 +14,35 @@ class App extends Component {
       this.state = {
         inventory: []
     };
-    this.componentDidMount = this.componentDidMount.bind(this);
+    this.getProducts = this.getProducts.bind(this);
   }
 
 
   componentDidMount() {
-    axios
-      .get('/api/inventory')
-      .then(res => {
-        this.setState({
-          inventory: res.data
-        })
-      })
+    this.getProducts()
   }
 
-  addProduct(){
-    const {imgurl, price, name} = this.state;
-    axios.post('/api/invetory', {imgurl, price, name }).then(res => {
+  getProducts() {
+    axios
+    .get('/api/inventory')
+    .then(res => {
       this.setState({
         inventory: res.data
       })
     })
   }
-
-
+  
   render(){
     return (
       <div className="App">
         <Header />
         <Dashboard 
-        inventoryList={this.state.inventory}
-        componentDidMountFn={this.componentDidMount}
+          inventoryList={this.state.inventory}
+        // componentDidMountFn={this.componentDidMount}
         />
-        <Form />
+        <Form 
+          getProductsFn={this.getProducts}
+        />
       </div>
     );
   }
