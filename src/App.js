@@ -14,7 +14,9 @@ class App extends Component {
       this.state = {
         inventory: []
     };
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
+
 
   componentDidMount() {
     axios
@@ -42,6 +44,7 @@ class App extends Component {
         <Header />
         <Dashboard 
         inventoryList={this.state.inventory}
+        componentDidMountFn={this.componentDidMount}
         />
         <Form />
       </div>
