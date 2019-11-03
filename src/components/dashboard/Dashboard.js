@@ -5,20 +5,27 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Product />
+
+
+        
         <h2>Dashboard.js</h2>
 
-        <div className="products-to-display" key={this.props.index}>
-          {console.log(this.props.index)}
-          <p>Img: </p>
-          <img src={this.props.el.image} alt=''/>
-          <p>Name: {this.props.el.name}</p>
-          <p>Price: ${this.props.el.price}</p>
-          {console.log(this.props.el)}
-        </div>
+        {this.props.inventoryList.map((element, index) => (
+        <Product 
+        
+          key={element.id}  //change this to id
+          el={element}
+          index={index}
+        />
+
+        ))}
+        
+
+
       </div>
     );
   } 
 }
 
 export default Dashboard;
+

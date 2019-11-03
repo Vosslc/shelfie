@@ -8,7 +8,7 @@ class Form extends Component {
     super();
 
       this.state = {
-        imgurl: '',
+        img_url: '',
         name: '',
         price: 0
     };
@@ -17,7 +17,7 @@ class Form extends Component {
 // METHODS
 
 handleImgUrlChange(url){
-  this.setState({ imgurl: url })
+  this.setState({ img_url: url })
 }
 
 handleProductNameChange(productName){
