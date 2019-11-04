@@ -6,8 +6,8 @@ const {SERVER_PORT, CONNECTION_STRING} = process.env
 
 const app = express() 
 
-massive(CONNECTION_STRING).then(databaseConnection => {
-  app.set('db', databaseConnection) //this is an express function. Look more into it
+massive(CONNECTION_STRING).then(dbInstance => {
+  app.set('db', dbInstance) //this is an express function. Look more into it
   console.log('DB connected')
   app.listen(SERVER_PORT, () => console.log(`${SERVER_PORT} beers on the wall.`))
   
@@ -18,17 +18,9 @@ app.use(express.json())
 
 // ENDPOINTS:
 const inventoryUrl = "/api/inventory"
+const inventoryUrlId = "/api/inventory/:id"
+
 app.post(inventoryUrl, ctrl.create);
 app.get(inventoryUrl, ctrl.read);
-app.put(inventoryUrl, ctrl.update);
-app.delete(inventoryUrl, ctrl.delete);
-
-
-
-// massive(CONNECTION_STRING).then(dbInstance => {
-//   app.set('db', dbInstance);
-//   app.listen(SERVER_PORT, () => {
-//     console.log(`Brewers listening for ${SERVER_PORT} BBLs to the fall!`)
-//   })
-// })
-// .catch(err => console.log(err));
+app.put(inventoryUrlId, ctrl.update);
+app.delete(inventoryUrlId, ctrl.delete);

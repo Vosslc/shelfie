@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 class Product extends Component {
+
+
+
   render() {
     return (
 
@@ -11,6 +14,8 @@ class Product extends Component {
         <p>Name: {this.props.el.name}</p>
         <p>Price: ${this.props.el.price}</p>
         {/* {console.log(this.props.el)} */}
+        <button onClick={() => this.props.deleteAProductFn(this.props.el.id)} className='delete'>Delete</button>
+        <button className='edit'>Edit</button>
       </div>
 
     );

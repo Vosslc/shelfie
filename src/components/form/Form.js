@@ -8,6 +8,7 @@ class Form extends Component {
     super();
 
       this.state = {
+        // id: '',
         image_url: '',
         name: '',
         price: 0
@@ -38,6 +39,12 @@ addAProduct(){
     .then(() => {this.props.getProductsFn()})
     this.clearInputField()
 }
+
+// deleteAProduct(){
+//   const {id} = this.state;
+//     axios.delete('/api/inventory/:id', {id})
+//     .then(()=> {this.props.getProductsFn()})
+// }
 
 
 //*********/ 

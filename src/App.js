@@ -38,10 +38,11 @@ class App extends Component {
         <Header />
         <Dashboard 
           inventoryList={this.state.inventory}
+          getProductsFn={this.getProducts}
         // componentDidMountFn={this.componentDidMount}
         />
         <Form 
-          getProductsFn={this.getProducts}
+          // getProductsFn={this.getProducts}
         />
       </div>
     );
