@@ -13,7 +13,7 @@ constructor(){
   deleteAProduct(id){
     // console.log(id)
       axios.delete(`/api/inventory/${id}`)
-      .then((res)=> {
+      .then(()=> {
         this.props.getProductsFn();
       })
   }
