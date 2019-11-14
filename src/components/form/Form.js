@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 class Form extends Component {
@@ -19,12 +20,12 @@ class Form extends Component {
   }
 
 //Life Cycles
-//! NOTE componentDidUpdate anytime the component recives new props it will run, and it captures the previous props. the whole perpous is to compare the new props to old props
+//! NOTE componentDidUpdate anytime the component recives new props it will run, and it captures the previous props. the whole perpose is to compare the new props to old props
 componentDidUpdate(prevProps){ //this is react magic.....   the prev props is automaticly stored here...
-  // console.log(this.props.currentSelectedProduct)
-  const { id, image_url, name, price } = this.props.currentSelectedProduct;
+  // console.log(this.props.editProductMethod)
+  const { id, image_url, name, price } = this.props.editProductMethod;
   // console.log(image_url)
-  if (this.props.currentSelectedProduct !== prevProps.currentSelectedProduct){
+  if (this.props.editProductMethod !== prevProps.editProductMethod){
     this.setState({
       currentSelectedId: id,
       image_url: image_url, 
@@ -119,12 +120,14 @@ saveChanges = () => {
           />
         </form>
 
-        <button onClick={this.clearInputField} className="cancel">Cancel</button>
-        {!this.state.currentSelectedId ? (
-          <button onClick={this.addAProduct} className="add">Add To Inventory</button>
-          ) : (
-            <button onClick={this.saveChanges} className="save">Save Changes</button>
-        )}
+        <Link to="/">
+          <button onClick={this.clearInputField} className="cancel">Cancel</button>
+          {!this.state.currentSelectedId ? (
+            <button onClick={this.addAProduct} className="add">Add To Inventory</button>
+            ) : (
+              <button onClick={this.saveChanges} className="save">Save Changes</button>
+          )}
+        </Link>
       </div>
     );
   }
