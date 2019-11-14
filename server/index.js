@@ -6,12 +6,6 @@ const {SERVER_PORT, CONNECTION_STRING} = process.env
 
 const app = express() 
 
-massive(CONNECTION_STRING).then(dbInstance => {
-  app.set('db', dbInstance) //this is an express function. Look more into it
-  console.log('DB connected')
-  app.listen(SERVER_PORT, () => console.log(`${SERVER_PORT} beers on the wall.`))
-  
-})
 
 
 app.use(express.json())
@@ -24,3 +18,11 @@ app.post(inventoryUrl, ctrl.create);
 app.get(inventoryUrl, ctrl.read);
 app.put(inventoryUrlId, ctrl.update);
 app.delete(inventoryUrlId, ctrl.delete);
+
+
+massive(CONNECTION_STRING).then(dbInstance => {
+  app.set('db', dbInstance) //this is an express function. Look more into it
+  console.log('DB connected')
+  app.listen(SERVER_PORT, () => console.log(`${SERVER_PORT} beers on the wall.`))
+
+  })

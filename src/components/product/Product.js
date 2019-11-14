@@ -10,12 +10,21 @@ class Product extends Component {
       <div className="products-to-display">
         {/* {console.log(this.props.index)} */}
         <p>Img: </p>
-        <img src={this.props.el.image_url} alt=''/>
-        <p>Name: {this.props.el.name}</p>
-        <p>Price: ${this.props.el.price}</p>
-        {/* {console.log(this.props.el)} */}
-        <button onClick={() => this.props.deleteAProductFn(this.props.el.id)} className='delete'>Delete</button>
-        <button className='edit'>Edit</button>
+        <img src={this.props.element.image_url} alt=''/>
+        <p>Name: {this.props.element.name}</p>
+        <p>Price: ${this.props.element.price}</p>
+        {/* {console.log(this.props.element)} */}
+        <button onClick={() => 
+          this.props.deleteAProductFn(this.props.element.id)} 
+          className='delete'>Delete
+        </button>
+        <button 
+          onClick={() =>
+            this.props.editProductMethod(this.props.element)
+          }
+          className='edit'>
+            Edit
+        </button>
       </div>
 
     );

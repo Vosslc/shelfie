@@ -30,23 +30,19 @@ module.exports = {
   },
 
   update: (req, res, next) => {
-
-    res.status(200).send("WTF did you update?")
+    const db = req.app.get('db')
+    // console.log(req.body) //! any data being passed from the front end to the BE via a post or a put
+    const { image_url, price, name } = req.body;
+    db.update_product(image_url, price, name, req.params.id)
+      .then(result => {
+        // console.log(result)
+        res.status(200).send(result)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
 
-  // delete: ( req, res, next ) => {
-  //   const db = req.app.get('db')
-  //   console.log(req.params)
-  //   console.log(req.params.id)
-
-  //   db.delete_product(req.params.id)
-  //     .then( result => {
-  //       res.satus(200).send(result) 
-  //     }).catch( err => {
-  //       res.status(500).send({errorMessage: "Something went wrong with delete_product. Our engineers have been informed!"});
-  //       console.log(err)
-  //     });
-  // }
   delete: (req, res) => {
     const db = req.app.get('db');
     // console.log(req.params.id)

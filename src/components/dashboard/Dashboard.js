@@ -29,10 +29,11 @@ constructor(){
         {this.props.inventoryList.map((element, index) => (
         <Product 
         
-          key={element.id}  //change this to id
-          el={element}
+          key={element.id}  
+          element={element}
           index={index}
           deleteAProductFn={this.deleteAProduct}
+          editProductMethod={this.props.editProductMethod}
         />
         ))}
         

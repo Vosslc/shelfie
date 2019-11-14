@@ -8,16 +8,33 @@ class Form extends Component {
     super();
 
       this.state = {
-        // id: '',
+        currentSelectedId: null,
         image_url: '',
+        // 'https://epaper.thesangaiexpress.com/images/not_found.png'
         name: '',
-        price: 0
+        price: 0,
     };
-    this.addAProduct = this.addAProduct.bind(this);
+    // this.addAProduct = this.addAProduct.bind(this); 
+    this.clearInputField = this.clearInputField.bind(this);
   }
 
-// METHODS
+//Life Cycles
+//! NOTE componentDidUpdate anytime the component recives new props it will run, and it captures the previous props. the whole perpous is to compare the new props to old props
+componentDidUpdate(prevProps){ //this is react magic.....   the prev props is automaticly stored here...
+  // console.log(this.props.currentSelectedProduct)
+  const { id, image_url, name, price } = this.props.currentSelectedProduct;
+  // console.log(image_url)
+  if (this.props.currentSelectedProduct !== prevProps.currentSelectedProduct){
+    this.setState({
+      currentSelectedId: id,
+      image_url: image_url, 
+      name: name, 
+      price: price 
+    })
+  }
+}
 
+// METHODS
 handleImgUrlChange(url){
   this.setState({ image_url: url })
 }
@@ -29,16 +46,40 @@ handleProductNameChange(productName){
 handlePriceChange(priceChange){
   this.setState({ price: priceChange })
 }
+
 clearInputField(){
-  document.getElementById("product-form").reset();
+  this.setState({ 
+    currentSelectedId: null,
+    image_url: 'https://epaper.thesangaiexpress.com/images/not_found.png',
+    name: '',
+    price: 0,
+  });
 }
 
-addAProduct(){
+addAProduct = () => { //Arrow Functions lexically bind their context so this actually refers to the originating context REF https://hackernoon.com/javascript-es6-arrow-functions-and-lexical-this-f2a3e2a5e8c4
   const {image_url, price, name} = this.state;
-    axios.post('/api/inventory', {image_url, price, name })
+    axios
+    .post('/api/inventory', {image_url, price, name })
     .then(() => {this.props.getProductsFn()})
+    .catch(err => console.log(err))
     this.clearInputField()
 }
+
+saveChanges = () => {
+  axios
+    .put(`/api/inventory/${this.state.currentSelectedId}`, { 
+      image_url: this.state.image_url,
+      name: this.state.name,
+      price: this.state.price,
+    })
+    .then(() => {this.props.getProductsFn()})     //this.props.history.push("/")
+    .catch(err => console.log(err))
+}
+
+
+
+
+// handleCurrentSelectedProduct(){}
 
 // deleteAProduct(){
 //   const {id} = this.state;
@@ -50,21 +91,40 @@ addAProduct(){
 //*********/ 
 
   render() {
+    const { image_url, name, price } = this.state;
     return (
       <div>
+
         <h2>Form.js</h2>
-        
         <form id="product-form">
           <p>IMG URL:</p>
-          <input onChange={e => this.handleImgUrlChange(e.target.value)} type="text"/>
-          <p>Product Name:</p>
-          <input onChange={e => this.handleProductNameChange(e.target.value)} type="text"/>
-          <p>Price:</p>
-          <input onChange={e => this.handlePriceChange(e.target.value)} type="text"/>
-        </form>
-        <button onClick={this.clearInputField} className="cancel">Cancel</button>
-        <button onClick={this.addAProduct}className="add">Add To Inventory</button>
+          <input 
+            onChange={e => this.handleImgUrlChange(e.target.value)} 
+            type="text"
+            value={image_url}
+          />
 
+          <p>Product Name:</p>
+          <input 
+            onChange={e => this.handleProductNameChange(e.target.value)} 
+            type="text"
+            value={name}
+          />
+
+          <p>Price:</p>
+          <input 
+          onChange={e => this.handlePriceChange(e.target.value)} 
+          type="text"
+          value={price}
+          />
+        </form>
+
+        <button onClick={this.clearInputField} className="cancel">Cancel</button>
+        {!this.state.currentSelectedId ? (
+          <button onClick={this.addAProduct} className="add">Add To Inventory</button>
+          ) : (
+            <button onClick={this.saveChanges} className="save">Save Changes</button>
+        )}
       </div>
     );
   }

@@ -12,15 +12,23 @@ class App extends Component {
     super(props);
 
       this.state = {
-        inventory: []
+        inventory: [],
+        selectedProduct: {}
     };
     this.getProducts = this.getProducts.bind(this);
+    this.editProduct = this.editProduct.bind(this);
   }
 
+//Life Cycles
+componentDidMount() {
+  this.getProducts()
+}
 
-  componentDidMount() {
-    this.getProducts()
-  }
+// METHODS
+  editProduct(product){ 
+    console.log(product)
+    this.setState({selectedProduct: product})//this is an obecjt thats on state
+    }
 
   getProducts() {
     axios
@@ -31,19 +39,41 @@ class App extends Component {
       })
     })
   }
+
+
+
+
+  // editProduct() {
+  //   axios
+  //   .get('/api/inventory')
+  //   .then(res => {
+  //     this.setState({
+  //       inventory: res.data
+  //     })
+  //   })
+  // }
   
   render(){
     return (
-      <div className="App">
-        <Header />
-        <Dashboard 
-          inventoryList={this.state.inventory}
-          getProductsFn={this.getProducts}
-        // componentDidMountFn={this.componentDidMount}
-        />
-        <Form 
-          // getProductsFn={this.getProducts}
-        />
+      <div className="">
+        <div className="header">
+          <Header />
+        </div>
+      
+        <div className="App">
+          
+          <Dashboard 
+            inventoryList={this.state.inventory}
+            getProductsFn={this.getProducts}
+            editProductMethod={this.editProduct}
+
+          // componentDidMountFn={this.componentDidMount}
+          />
+          <Form 
+            getProductsFn={this.getProducts}
+            currentSelectedProduct={this.state.selectedProduct}
+          />
+        </div>
       </div>
     );
   }
