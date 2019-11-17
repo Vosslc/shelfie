@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Product from '../product/Product'
-// import Form from '../form/Form'
+import './Dash.css'
 import axios from 'axios';
 
 class Dashboard extends Component {
@@ -8,11 +8,9 @@ class Dashboard extends Component {
     super(props)
 
       this.state = {
-        inventory: [],
-        selectedProduct: {}
+        inventory: []
     };
     this.getProducts = this.getProducts.bind(this);
-    this.editProduct = this.editProduct.bind(this);
     this.deleteAProduct=this.deleteAProduct.bind(this);
   };
 
@@ -22,10 +20,6 @@ class Dashboard extends Component {
   }
   
   // METHODS
-    editProduct(product){ 
-      console.log(product)
-      this.setState({selectedProduct: product})//this is an obecjt thats on state
-      }
   
     getProducts() {
       axios
@@ -48,11 +42,11 @@ class Dashboard extends Component {
   render() {
 
     return (
-      <div>
+      <div className="dash">
 
 
         
-        <h2>Dashboard.js</h2>
+        {/* <h2>Dashboard.js</h2> */}
 
         {this.state.inventory.map((element, index) => (
         <Product 
@@ -61,18 +55,8 @@ class Dashboard extends Component {
           element={element}
           index={index}
           deleteAProductFn={this.deleteAProduct}
-          editProductMethod={this.editProducts}
         />
         ))}
-
-        {/* <Form 
-              getProductsFn={this.getProducts}
-              currentSelectedProduct={this.state.selectedProduct}
-              
-        /> */}
-        
-        {/* <button className='delete'>Delete</button>
-        <button className='edit'>Edit</button> */}
       </div>
     )
   } 

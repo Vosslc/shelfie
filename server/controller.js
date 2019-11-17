@@ -52,5 +52,14 @@ module.exports = {
     }).catch(err => console.log(err))
 },
 
+getOne(req, res) {
+  const db = req.app.get('db')
+  db.get_one(+req.params.id)
+  .then(result => {
+    res.status(200).send(result)
+  })
+  .catch(err => console.log(err))
+},
+
 }
 

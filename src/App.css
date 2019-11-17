@@ -2,8 +2,8 @@
   text-align: center;
 } */
 .header{
-  background-color: #AB2918;
-  /* min-height: 100vh; */
+  /* background-color: #AB2918;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,14 +11,14 @@
   font-size: calc(10px + 2vmin);
   color: white;
   position: sticky;
-  top: 0;
+  top: 0; */
 }
 
 .App-logo {
   height: 40vmin;
 }
 
-.App{
+.app{
 	/* background: white; */
 	padding-top: 15px;
 	background-color: #white;

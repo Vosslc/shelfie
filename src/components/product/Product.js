@@ -21,11 +21,8 @@ class Product extends Component {
           className='delete'>Delete
         </button>
 
-        <Link to={`/add/${this.props.element.id}`}>
+        <Link to={`/edit/${this.props.element.id}`}>
           <button 
-            onClick={() =>
-              this.props.editProductMethod(this.props.element)
-            }
             className='edit'>
               Edit
           </button>

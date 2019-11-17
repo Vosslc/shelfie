@@ -15,6 +15,7 @@ const inventoryUrl = "/api/inventory"
 const inventoryUrlId = "/api/inventory/:id"
 
 app.post(inventoryUrl, ctrl.create);
+app.get(inventoryUrlId, ctrl.getOne)
 app.get(inventoryUrl, ctrl.read);
 app.put(inventoryUrlId, ctrl.update);
 app.delete(inventoryUrlId, ctrl.delete);
